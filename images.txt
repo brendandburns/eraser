@@ -1,0 +1,2 @@
+burns.azurecr.io/osm/bookstore:latest
+burns.azurecr.io/osm/osm-controller:latest
