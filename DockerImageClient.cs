@@ -15,7 +15,10 @@ namespace Eraser {
         public async Task<List<string>> ListAsync() {
             var images = await docker.Images.ListImagesAsync(new ImagesListParameters());
             List<string> result = new List<string>();
-
+            if (images == null)
+            {
+                return result;
+            }
             foreach (var image in images)
             {
                 foreach (var tag in image.RepoTags)

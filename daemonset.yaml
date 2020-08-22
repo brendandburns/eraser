@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: image-eraser
+  namespace: kube-system
+  labels:
+    k8s-app: image-eraser
+spec:
+  selector:
+    matchLabels:
+      name: image-eraser
+  template:
+    metadata:
+      labels:
+        name: image-eraser
+    spec:
+      tolerations:
+      # Schedule to all nodes
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      serviceAccountName: image-eraser
+      containers:
+      - name: image-eraser
+        image: brendanburns/eraser:v1
+        args:
+        - --config-map=images
+        - --config-map-namespace=kube-system
+        - --debug
+        resources:
+          limits:
+            cpu: 500m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+          readOnly: false
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: "/var/run/docker.sock"
+            type: File
