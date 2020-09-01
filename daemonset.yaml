@@ -21,7 +21,7 @@ spec:
       serviceAccountName: image-eraser
       containers:
       - name: image-eraser
-        image: brendanburns/eraser:v1
+        image: brendanburns/eraser:v3
         args:
         - --config-map=images
         - --config-map-namespace=kube-system

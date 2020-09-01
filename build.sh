@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG=v2
+TAG=v3
 
 dotnet publish -c Release
 docker build -t brendanburns/eraser:${TAG} .
