@@ -27,6 +27,5 @@ jobs:
       env:
         PROJECT_PATH: brendandburns/eraser
         PACKAGE_MANAGER: nuget
-        DIRECTORY_PATH: /src
       run: |
-        docker run dependabot/dependabot-script -v $PWD:/src
+        docker run dependabot/dependabot-script -v $PWD:/src -e PROJECT_PATH=$PROJECT_PATH -e PACKAGE_MANAGER=$PACKAGE_MANAGER -e DIRECTORY=src -e GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN 
