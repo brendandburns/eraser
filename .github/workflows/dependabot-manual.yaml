@@ -23,7 +23,7 @@ jobs:
       run: |
         cd /tmp/dependabot-script
         docker build -t "dependabot/dependabot-script" -f Dockerfile .
-    - name: Run go dependencies
+    - name: Run dependabot
       env:
         PROJECT_PATH: brendandburns/eraser
         PACKAGE_MANAGER: nuget
